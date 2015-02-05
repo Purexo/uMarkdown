@@ -9,7 +9,7 @@ Ainsi que [celui-ci](http://daringfireball.net/projects/markdown/syntax) pour la
 Outil cli :    
 
 ``` bash
-java -jar path/to/uMarkdown "path/to/your/file.md" "path/to/your/file.html"
+java -jar path/to/µMarkdown.jar "path/to/your/file.md" "path/to/your/file.html"
 ```
 
 # Licence
