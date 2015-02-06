@@ -1,4 +1,7 @@
 *.jar
+!lib/*.jar
+
 bin/
 .settings/
-!lib/*.jar
+
+test/*.html
