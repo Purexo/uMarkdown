@@ -5,7 +5,11 @@ La librairie pour parser utilisé est [markdown4j](https://code.google.com/p/mar
 Suivez le lien ci-dessus pour découvrir les fonctionalités syntaxique supplémentaire de ce parseur.     
 Ainsi que [celui-ci](http://daringfireball.net/projects/markdown/syntax) pour la doc officielle.
 
+# Telechargement
+[Les dernieres Releases](https://github.com/purexo/uMarkdown/releases)
+
 # Utilisation
+
 Outil cli :    
 
 ``` bash
@@ -14,6 +18,12 @@ java -jar path/to/µMarkdown.jar "path/to/your/file.md" "path/to/your/file.html"
 java -jar path/to/µMarkdown.jar "path/to/your/file.md"
 #The html will be at the same place with file.md.html as name
 ```
+
+Outil graphique :
+``` bash
+java -jar path/to/µMarkdown.jar #Vous aurez les logs
+```
+Ou simplement double clic sur le fichier .jar
 
 # Licence
 Creative Commons - BY - NC - SA    
@@ -26,7 +36,7 @@ En gros vous pouvez utiliser mon code (ainsi que le binaire) librement
 # Pour la suite :
 ### V1 :
 1. <s>Un mode "automatique" seul le fichier markdown est a fournir, le fichier html seras généré dans le meme dossier que le fichier markdown avec le meme nom + ".html"</s> (done)
-2. Une interface graphique (simple) une case pour le fichier markdown (pouvant ouvrir une fenetre de navigation pour choisir le fichier). Un deuxieme case pour choisir la destination. et un bouton valider
+2. <s>Une interface graphique (simple) une case pour le fichier markdown (pouvant ouvrir une fenetre de navigation pour choisir le fichier). Un deuxieme case pour choisir la destination. et un bouton valider</s> (done)
 3. Faire un code un peu moins degeulasse (genre pas faire en sorte que le main() balance des exceptions ... xD)
 
 ---------------------------------------------------------------------------
