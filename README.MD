@@ -10,6 +10,9 @@ Outil cli :
 
 ``` bash
 java -jar path/to/µMarkdown.jar "path/to/your/file.md" "path/to/your/file.html"
+#OR
+java -jar path/to/µMarkdown.jar "path/to/your/file.md"
+#The html will be at the same place with file.md.html as name
 ```
 
 # Licence
