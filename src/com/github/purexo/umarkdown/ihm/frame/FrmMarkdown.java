@@ -1,8 +1,6 @@
 package com.github.purexo.umarkdown.ihm.frame;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -10,26 +8,8 @@ import javax.swing.border.EmptyBorder;
 import com.github.purexo.umarkdown.ihm.panel.PnlMarkdown;
 
 public class FrmMarkdown extends JFrame {
-
+	private static final long serialVersionUID = 3558124465192390135L;
 	private JPanel contentPane;
-
-	/**
-	 * Launch the application.
-	 */
-	/*
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					FrmMarkdown frame = new FrmMarkdown();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-	*/
 
 	/**
 	 * Create the frame.

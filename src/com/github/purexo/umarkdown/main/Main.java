@@ -1,7 +1,6 @@
 package com.github.purexo.umarkdown.main;
 import java.io.File;
 import java.io.FileWriter;
-import java.io.IOException;
 
 import org.markdown4j.Markdown4jProcessor;
 
@@ -21,6 +20,7 @@ public class Main {
 	 */
 	
 	public static void main(String[] args) throws Exception {
+		@SuppressWarnings("unused")
 		String[] targs = {
 			"G:\\Travail\\Perso\\Java\\µmarkdown\\test\\test.md"
 			// ,"C:\\Users\\Théotime\\Desktop\\test.html"
@@ -30,6 +30,7 @@ public class Main {
 		
 		switch (args.length) {
 			case 0:
+				@SuppressWarnings("unused")
 				FrmMarkdown framePrg = new FrmMarkdown();
 				break;
 				// throw new Exception("1: nb de parametres insufisant (GUI non implanté)");

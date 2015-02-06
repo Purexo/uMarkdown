@@ -2,28 +2,20 @@ package com.github.purexo.umarkdown.ihm.panel;
 
 import javax.swing.JFileChooser;
 import javax.swing.JPanel;
-import javax.swing.JTree;
-import javax.swing.JMenuBar;
-
-import java.awt.FlowLayout;
-
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.Box;
-
-import java.awt.Component;
 import java.awt.GridLayout;
-
-import javax.swing.JLabel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.io.File;
 
 import com.github.purexo.umarkdown.main.Main;
 
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.Dimension;
-import java.io.File;
 
 public class PnlMarkdown extends JPanel {
+	private static final long serialVersionUID = -6751670620071347727L;
+	
 	private JTextField strFileMd;
 	private JTextField strFileHTML;
 
