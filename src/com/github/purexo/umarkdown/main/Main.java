@@ -5,6 +5,8 @@ import java.io.IOException;
 
 import org.markdown4j.Markdown4jProcessor;
 
+import com.github.purexo.umarkdown.ihm.frame.FrmMarkdown;
+
 public class Main {
 	/**
 	 * Entrées :
@@ -25,42 +27,24 @@ public class Main {
 		};
 		File fEntree;
 		File fSortie;
-		FileWriter fwSortie;
-		String html;
 		
 		switch (args.length) {
 			case 0:
-				throw new Exception("1: nb de parametres inssufisant (GUI non implanté)");
+				FrmMarkdown framePrg = new FrmMarkdown();
+				break;
+				// throw new Exception("1: nb de parametres insufisant (GUI non implanté)");
 			case 1:
 				fEntree = new File(args[0]);
 				fSortie = new File(autoName(fEntree));
+				fileToHTML(fEntree, fSortie);
 				break;
 			default:
 				fEntree = new File(args[0]);
 				fSortie = new File(args[1]);
+				fileToHTML(fEntree, fSortie);
 				break;
-				
 		}
-
-		html = mdToHTML(fEntree); // peut couper le programme (throw exception n°2)
-		fwSortie = new FileWriter(fSortie);
-
-		if (!fSortie.canWrite()) {
-			fwSortie.close();
-			throw new Exception("3: Adresse du fichier html incorrecte");
-		}
-		fSortie.createNewFile(); 									// Creer un nouveau fichier au besoin
-		fwSortie.flush();											// Le nettoie avant écriture
-		fwSortie.write(html);
-		fwSortie.close();
-
-		String success = "" +
-		"Votre fichier " + fEntree.getName() + "\n" +
-		"à été Parsé vers \n" +
-		fSortie.getAbsolutePath() + "\n" +
-		"Avec Succes.";
 		
-		System.out.println(success);
 	}
 	
 	/**
@@ -69,7 +53,7 @@ public class Main {
 	 * @return
 	 * @throws Exception
 	 */
-	private static String mdToHTML(File fEntree) throws Exception {
+	public static String mdToHTML(File fEntree) throws Exception { // public pour etre appelable depuis l'interface graphique
 		if (fEntree.exists() && fEntree.canRead() && fEntree.isFile())
 			return new Markdown4jProcessor().process(fEntree);
 		else {
@@ -82,7 +66,7 @@ public class Main {
 	 * @param f un Fichier
 	 * @return le nom du fichier - l'extension + ".html"
 	 */
-	private static String autoName(File f) {
+	public static String autoName(File f) { // public pour etre appelable depuis l'interface graphique
 		return f.getParent() + "/" + f.getName() + ".html";
 		/*
 		String[] tab = f.getName().split(".");
@@ -96,11 +80,27 @@ public class Main {
 		*/
 	}
 	
-	/*
-	 * Prevue pour version future
-	 * possibilité de reduire à 1 le nb de parametres (param d'entree)
-	 * 	creer et nommer automatiquement le fichier de sortie en fonction du fichier d'entree
-	 *  dans le meme dossier, avec .html en plus
-	 */
+	public static void fileToHTML(File fEntree, File fSortie) throws Exception { // public pour etre appelable depuis l'interface graphique
+		String html = mdToHTML(fEntree); // peut couper le programme (throw exception n°2)
+		FileWriter fwSortie = new FileWriter(fSortie);
+
+		if (!fSortie.canWrite()) {
+			fwSortie.close();
+			throw new Exception("3: Adresse du fichier html incorrecte");
+		}
+		
+		fSortie.createNewFile(); 									// Creer un nouveau fichier au besoin
+		fwSortie.flush();											// Le nettoie avant écriture
+		fwSortie.write(html);
+		fwSortie.close();
+
+		String success = "" +
+		"Votre fichier " + fEntree.getName() + "\n" +
+		"à été Parsé vers \n" +
+		fSortie.getAbsolutePath() + "\n" +
+		"Avec Succes.";
+		
+		System.out.println(success);
+	}
 
 }
