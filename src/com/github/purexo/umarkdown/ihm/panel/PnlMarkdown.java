@@ -5,6 +5,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.Box;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -37,49 +39,19 @@ public class PnlMarkdown extends JPanel {
 		 * Bouton pour selectionner le fichier d'entree
 		 */
 		JButton btnFileMd = new JButton("Browse Markdown File");
-		btnFileMd.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				JFileChooser chooser = new JFileChooser();
-		        int returnVal = chooser.showOpenDialog(chooser.getParent());
-		        if(returnVal == JFileChooser.APPROVE_OPTION) {
-		        	fEntree = chooser.getSelectedFile();
-		        	strFileMd.setText(chooser.getSelectedFile().getAbsolutePath());
-		        }
-			}
-		});
+		btnFileMd.addActionListener(ALBtnMd);
 		
 		/*
 		 * Bouton pour selectionner le fichier de sortie
 		 */
 		JButton btnFileHTML = new JButton("Browse HTML File");
-		btnFileHTML.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				JFileChooser chooser = new JFileChooser();
-		        int returnVal = chooser.showOpenDialog(chooser.getParent());
-		        if(returnVal == JFileChooser.APPROVE_OPTION) {
-		        	fSortie = chooser.getSelectedFile();
-		        	strFileHTML.setText(chooser.getSelectedFile().getAbsolutePath());
-		        }
-			}
-		});
+		btnFileHTML.addActionListener(ALBtnHTML);
 
 		/*
 		 * Bouton lancer la procedure
 		 */
-		JButton btnValidate = new JButton("Valider");
-		btnValidate.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				fEntree = new File(strFileMd.getText());
-				
-				if (strFileHTML.getText().length() == 0)
-					fSortie = new File(Main.autoName(fEntree));
-				else
-					fSortie = new File(strFileHTML.getText());
-				
-				try { Main.fileToHTML(fEntree, fSortie); }
-				catch (Exception e1) { e1.printStackTrace(); }
-			}
-		});
+		JButton btnValidate = new JButton("Run");
+		btnValidate.addActionListener(ALBtnOK);
 		
 		Box horizontalBox = Box.createHorizontalBox();
 
@@ -92,4 +64,47 @@ public class PnlMarkdown extends JPanel {
 
 	}
 
+	/* --- ActionListener --- */
+	private ActionListener ALBtnMd = new ActionListener() { // bouton Markdown
+		public void actionPerformed(ActionEvent arg0) {
+			JFileChooser chooser = new JFileChooser();
+			FileNameExtensionFilter filter = new FileNameExtensionFilter(
+			        "Markdown files", "md", "markdown");
+		    chooser.setFileFilter(filter);
+
+	        int returnVal = chooser.showOpenDialog(chooser.getParent());
+	        if(returnVal == JFileChooser.APPROVE_OPTION) {
+	        	fEntree = chooser.getSelectedFile();
+	        	strFileMd.setText(chooser.getSelectedFile().getAbsolutePath());
+	        }
+		}
+	};
+	private ActionListener ALBtnHTML = new ActionListener() { // bouton HTML
+		public void actionPerformed(ActionEvent arg0) {
+			JFileChooser chooser = new JFileChooser();
+			FileNameExtensionFilter filter = new FileNameExtensionFilter(
+			        "HTML files", "html", "htm", "xhtml");
+		    chooser.setFileFilter(filter);
+		    
+	        int returnVal = chooser.showOpenDialog(chooser.getParent());
+	        if(returnVal == JFileChooser.APPROVE_OPTION) {
+	        	fSortie = chooser.getSelectedFile();
+	        	strFileHTML.setText(chooser.getSelectedFile().getAbsolutePath());
+	        }
+		}
+	};
+	private ActionListener ALBtnOK = new ActionListener() { // bouton de validation
+		public void actionPerformed(ActionEvent e) {
+			fEntree = new File(strFileMd.getText());
+			
+			if (strFileHTML.getText().length() == 0)
+				fSortie = new File(Main.autoName(fEntree));
+			else
+				fSortie = new File(strFileHTML.getText());
+			
+			try { Main.fileToHTML(fEntree, fSortie); }
+			catch (Exception e1) { e1.printStackTrace(); }
+		}
+	};
+	
 }
