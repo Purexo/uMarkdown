@@ -82,7 +82,20 @@ public class Main {
 	}
 	
 	public static void fileToHTML(File fEntree, File fSortie) throws Exception { // public pour etre appelable depuis l'interface graphique
-		String html = mdToHTML(fEntree); // peut couper le programme (throw exception n°2)
+		String userInclude = 
+			"<link rel=\"stylesheet\" href=\"//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/default.min.css\">" + "\n\t" +
+			"<script src=\"//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js\"></script>";
+		userInclude = "";
+		String html =
+			"<!DOCTYPE HTML>\n<html>\n<head>\n" +
+			"\t<meta http-equiv=\"Content-Type\" content=\"text/html\" />" + "\n" +
+			"\t<title>" + fSortie.getName() + "</title>" + "\n" +
+			"\t" + userInclude + "\n" +
+			"</head>" + "\n" +
+			"<body>" + "\n" +
+			mdToHTML(fEntree) + // peut couper le programme (throw exception n°2)
+			"</body>\n</html>";
+		
 		FileWriter fwSortie = new FileWriter(fSortie);
 
 		if (!fSortie.canWrite()) {
