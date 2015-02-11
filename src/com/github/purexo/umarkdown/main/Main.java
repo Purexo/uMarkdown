@@ -83,9 +83,10 @@ public class Main {
 	
 	public static void fileToHTML(File fEntree, File fSortie) throws Exception { // public pour etre appelable depuis l'interface graphique
 		String userInclude = 
-			"<link rel=\"stylesheet\" href=\"//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/default.min.css\">" + "\n\t" +
-			"<script src=\"//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js\"></script>";
-		userInclude = "";
+			"<link rel=\"stylesheet\" href=\"http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/default.min.css\">" + "\n\t" +
+			"<script src=\"http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js\"></script>" + "\n\t" +
+			"<script>hljs.initHighlightingOnLoad();</script>";
+		// userInclude = "";
 		String html =
 			"<!DOCTYPE HTML>\n<html>\n<head>\n" +
 			"\t<meta http-equiv=\"Content-Type\" content=\"text/html\" />" + "\n" +
