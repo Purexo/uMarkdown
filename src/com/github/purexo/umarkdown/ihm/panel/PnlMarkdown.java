@@ -13,6 +13,7 @@ import java.awt.event.ActionEvent;
 import java.io.File;
 
 import com.github.purexo.umarkdown.main.Main;
+import com.github.purexo.umarkdown.main.MarkdownHTML;
 
 
 public class PnlMarkdown extends JPanel {
@@ -94,16 +95,16 @@ public class PnlMarkdown extends JPanel {
 		}
 	};
 	private ActionListener ALBtnOK = new ActionListener() { // bouton de validation
-		public void actionPerformed(ActionEvent e) {
+		public void actionPerformed(ActionEvent event) {
 			fEntree = new File(strFileMd.getText());
 			
 			if (strFileHTML.getText().length() == 0)
-				fSortie = new File(Main.autoName(fEntree));
+				fSortie = new File(MarkdownHTML.autoName(fEntree));
 			else
 				fSortie = new File(strFileHTML.getText());
 			
-			try { Main.fileToHTML(fEntree, fSortie); }
-			catch (Exception e1) { e1.printStackTrace(); }
+			try { MarkdownHTML.fileToHTML(fEntree, fSortie); }
+			catch (Exception e) { e.printStackTrace(); }
 		}
 	};
 	

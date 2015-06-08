@@ -1,25 +1,102 @@
-Comme vous le savez probablement (sinon sortez de votre grotte !) Il y a eu un attentat hier (mercredi 7 janvier 2015) contre Charli Hebdo, le très célèbre journal satirique, ~~et régulièrement polémiste~~ (pour ceux qui n'ont pas d'humour, et incapable de supporter une critique)
+﻿Bonjour, je vous fournis un petit tuto pour installer et configurer une seedbox simplement sur votre serveur.
 
-Le peuple est en émois, le monde est en deuil, les médias à l'affuts du moindre événement à couvrir profitent pour faire de l'audimat. Bien sur je suis désolé par cet événement, voir des **terroristes** (Ils sont peut être islamiste mais ce sont des extrémistes et je tiens à rappeler que terroriste ne veut pas dire islamiste et vice versa...) s'attaquer à un symbole de la liberté d'expression c'est inadmissible !
+Mon système est basé sur transmission-daemon/transmission-remote et apache2 + h5ai (pour la beauté). Je pars du principe que votre apache est installé et configuré correctement, et que vous avez les bases dans la configuration d'apache, notamment sur les VirtualHost.
 
-J'ai été amenée à répondre à quelqu'un dans les commentaire d'une vidéo Youtube : <https://purexo.eu/shaarli/?06eksw>  
-Tout ça pour rappeler que ce n'est pas la religion le problème, mais les personnes capables d'accomplir des atrocité sous couverts de celle ci.
+## Prérequis
+- Debian 8
+- Apache >= 2.4
 
-Mais au final, ce qui me désole le plus, c'est de voir que médias et politiciens profitant de la situation pour toujours plus enfoncé les citoyens dans un climat d'insécurité.
+Sinon il y aura quelques configurations à adapter ;-)
 
-* [Marine Le Pen qui propose de réinstaurer la peine de mort ?](https://oniricorpe.eu/links/?HDUUxQ) On est plus au moyen age...
+## Installation
+```bash
+sudo apt-get install transmission-daemon
+sudo service transmission-daemon stop
+```
+## Configuration
+### Transmission
+Ensuite vous pourrez éditer le fichier de configuration (assurez vous à chaque fois que vous éditerez le fichier, que transmission-daemon sois stoppé) : `/etc/transmission-daemon/settings.json`. Voici les paramètres à modifier :
 
-Mais au final, [les dernières lois](https://bourgoinblog.wordpress.com/2014/09/21/la-nouvelle-loi-antiterroriste-est-liberticide-et-inefficace/) ( [liberticides je le rappel](https://bourgoinblog.wordpress.com/2014/12/27/la-loi-de-programmation-militaire-va-legaliser-la-surveillance-dinternet/comment-page-1/) ) votés, les plans vigi-pirates augmenté ont ils aidés sur cet événement ? Je ne pense pas, le mal à été fait.
+```JSON
+{
+    "download-dir": "/var/seedbox",
+    "incomplete-dir": "/var/seedbox/.incomplete", 
+    "incomplete-dir-enabled": true, 
+    "rpc-username": "VotreUserName", 
+    "rpc-password": "VotreMDPEnCLair", // quand le service démarrera il chiffrera votre mot de passe
+    "rpc-whitelist-enabled": false, 
+    "umask": 22, // pour que apache soit pas emmerdé plus tard
+}
+```
 
-Depuis que je suis enfant, on me rabâche que l'on vis dans une démocratie, ce qui inclue la liberté d'expression, sauf qu'avec le temps je vois les ficèles qui ce désagrègent et j'aperçois ce qui ce passent derrière le rideau pendant que tout le monde reste assis tranquillement sur son fauteuil, admirant le spectacle, comme si de rien était.
+### Apache
+```bash
+sudo mkdir /var/seedbox /var/seedbox/.incomplete
 
-Mes pensées vont bien évidement au familles des personnes assassinés et des victimes de cet attentat (journalistes, policiers, gendarmes, ou tout autre personnes).
+# instalation de h5ai
+cd /var/seedbox
+wget https://release.larsjung.de/h5ai/h5ai-0.27.0.zip
+unzip h5ai-0.27.0.zip
+rm h5ai-0.27.0.zip
 
-### Des soutients qui m'ont touchés :
+sudo nano /etc/apache2/sites-available/seedbox.conf
+```
 
-* [La complainte affranchie](https://oniricorpe.eu/blog/article6/la-complainte-affranchie)
-* [Compilation de dessins par Geoffrey Dorne](http://graphism.fr/les-dessinateurs-mobiliss-pour-charliehebdo/)
-* [C'est l'encre qui doit couler, pas le sang](https://hackingsocialblog.wordpress.com/2015/01/08/cest-lencre-qui-doit-couler-pas-le-sang/)
-* [#JeSuisCharlie - JB Bullet](https://www.youtube.com/watch?v=-bjbUg9d64g)
- 
-Je met en relation cet article avec [La France a peur: le syndrome du grand méchant monde](https://www.youtube.com/watch?v=8WiiqssAME4), une vidéo Youtube intéressante concernant la manipulation des masses par les médias.
+```
+# configurez et adapté selon vos besoin
+<VirtualHost *:80>
+        ServerAdmin ...@purexo.eu #à remplacer
+        ServerName seed.purexo.eu #à remplacer
+        ServerAlias seed.purexo.eu #à remplacer
+        DocumentRoot /var/seedbox
+        <Directory /var/seedbox>
+                Options +Indexes +FollowSymLinks +MultiViews
+                AllowOverride All
+                Require all granted
+        </Directory>
+        <Location />
+		Order allow,deny
+		Allow from all
+	</Location>
+        DirectoryIndex  index.html  index.php  /_h5ai/server/php/index.php
+</VirtualHost>
+```
+
+Une fois vos modifications faites, enregistrez, puis :
+
+```bash
+sudo a2ensite seedbox
+sudo service apache2 restart
+sudo chown -R debian-transmission:debian-transmission /var/seedbox
+sudo service transmission-daemon start
+```
+
+## Bonus pour rendre les fichiers privés
+Apache + h5ai ça permet d'avoir une jolie interface d'index, de cocher des fichiers pour en dl plusieurs à la fois, etc...    
+hésitez pas à aller éditer la configuration `/var/seedbox/_h5ai/conf`  
+Mais tout le monde y a accès, donc un peu de configuration apache pour régler ça
+
+```bash
+cd /var/seedbox
+htpasswd -c .htpasswd votreusername # pour le premier user
+htpasswd .htpasswd autreusername # pour les suivants
+nano .htaccess
+```
+
+```
+AuthType Basic
+AuthName "Seedbox area"
+AuthUserFile /var/seedbox/.htpasswd
+AuthGroupFile /dev/null
+Require valid-user
+```
+
+## Votre interface administrateur
+Au choix vous pouvez utiliser l'interface web ```http://votre.domaine:9091/```, ça fait le taf mais autant utiliser [transmission-remote](http://sourceforge.net/projects/transgui/) qui est plus complet dans son interaction avec votre serveur.
+
+Voila, maintenant vous pourrez télécharger vos isos de distribution linux préférés ;-)
+
+## Mes Sources / Librement inspiré de
+- https://www.guillaume-leduc.fr/la-seedbox-facile-sous-debian-avec-transmission.html (quelques petits rappel)
+- http://www.system-linux.eu/index.php?post/2009/04/23/Mettre-en-place-un-htaccess-avec-htpasswd (pour le htpasswd, je le savais mais ma mémoire est courte xD)
+- mes connaissances/expériences personnelles

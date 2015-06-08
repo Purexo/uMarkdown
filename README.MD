@@ -35,9 +35,9 @@ En gros vous pouvez utiliser mon code (ainsi que le binaire) librement
 
 # Pour la suite :
 ### V1 :
-1. <s>Un mode "automatique" seul le fichier markdown est a fournir, le fichier html seras généré dans le meme dossier que le fichier markdown avec le meme nom + ".html"</s> (done)
-2. <s>Une interface graphique (simple) une case pour le fichier markdown (pouvant ouvrir une fenetre de navigation pour choisir le fichier). Un deuxieme case pour choisir la destination. et un bouton valider</s> (done)
-3. Faire un code un peu moins degeulasse (genre pas faire en sorte que le main() balance des exceptions ... xD)
+1. [*] Un mode "automatique" seul le fichier markdown est a fournir, le fichier html seras généré dans le meme dossier que le fichier markdown avec le meme nom + ".html"</s> (done)
+2. [*] Une interface graphique (simple) une case pour le fichier markdown (pouvant ouvrir une fenetre de navigation pour choisir le fichier). Une deuxieme case pour choisir la destination. et un bouton valider
+3. [*] Faire un code un peu moins degeulasse (genre pas faire en sorte que le main() balance des exceptions ... xD)
 
 ---------------------------------------------------------------------------
 ### V2
