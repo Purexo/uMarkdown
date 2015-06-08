@@ -1,14 +1,11 @@
 package com.github.purexo.umarkdown.main;
 import java.io.File;
-import java.io.FileWriter;
-
-import org.markdown4j.Markdown4jProcessor;
 
 import com.github.purexo.umarkdown.ihm.frame.FrmMarkdown;
 
 public class Main {
 	/**
-	 * Entrées :
+	 * EntrÃ©es :
 	 * 	args[0] : Adresse du fichier markdown
 	 * 	args[1] : Adresse de sortie du fichier html
 	 * @param args
@@ -22,8 +19,8 @@ public class Main {
 	public static void main(String[] args) throws Exception {
 		@SuppressWarnings("unused")
 		String[] targs = {
-			"G:\\Travail\\Perso\\Java\\µmarkdown\\test\\test.md"
-			// ,"C:\\Users\\Théotime\\Desktop\\test.html"
+			"G:\\Travail\\Perso\\Java\\Âµmarkdown\\test\\test.md"
+			// ,"C:\\Users\\ThÃ©otime\\Desktop\\test.html"
 		};
 		File fEntree;
 		File fSortie;
@@ -33,7 +30,7 @@ public class Main {
 					@SuppressWarnings("unused")
 					FrmMarkdown framePrg = new FrmMarkdown();
 					break;
-					// throw new Exception("1: nb de parametres insufisant (GUI non implanté)");
+					// throw new Exception("1: nb de parametres insufisant (GUI non implantÃ©)");
 				case 1:
 					fEntree = new File(args[0]);
 					fSortie = new File(MarkdownHTML.autoName(fEntree));

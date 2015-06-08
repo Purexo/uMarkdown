@@ -12,7 +12,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.io.File;
 
-import com.github.purexo.umarkdown.main.Main;
 import com.github.purexo.umarkdown.main.MarkdownHTML;
 
 

@@ -8,13 +8,13 @@ import org.markdown4j.Markdown4jProcessor;
 public class MarkdownHTML {
 
 	/**
-	 * @param fEntree : un fichier texte rédigé en Markdown
+	 * @param fEntree : un fichier texte rÃ©digÃ© en Markdown
 	 * @return String : le texte au format HTML
 	 * @throws Exception : Signale que l'adresse est incorecte
 	 */
 	public static String mdToHTML(File fEntree) throws Exception { // public pour etre appelable depuis l'interface graphique
 		if (!fEntree.exists())
-			throw new Exception("2.0: Le fichier Mardown est inéxistant");
+			throw new Exception("2.0: Le fichier Mardown est inÃ©xistant");
 		
 		if (!fEntree.canRead())
 			throw new Exception("2.1: Vous n'avez pas les permissions pour lire le fichier");
@@ -26,7 +26,7 @@ public class MarkdownHTML {
 	}
 	
 	/**
-	 * Permet de transformer la chaine de caratère java.md en java.html
+	 * Permet de transformer la chaine de caratÃ¨re java.md en java.html
 	 * @param f un Fichier
 	 * @return le nom du fichier - l'extension + ".html"
 	 */
@@ -46,28 +46,28 @@ public class MarkdownHTML {
 	
 	public static void fileToHTML(File fEntree, File fSortie) throws Exception { // public pour etre appelable depuis l'interface graphique
 		if (!fEntree.exists())
-			throw new Exception("2.0: Le fichier Mardown est inéxistant");
+			throw new Exception("2.0: Le fichier Mardown est inÃ©xistant");
 		if (!fEntree.canRead())
 			throw new Exception("2.1: Vous n'avez pas les permissions pour lire le fichier");
 		if (!fEntree.isFile())
 			throw new Exception("2.2: l'URI du document fourni n'est pas un fichier");
 
 		if (!fSortie.canWrite())
-			throw new Exception("3: Vous n'avez pas la permission d'écriture sur ce ficher");
+			throw new Exception("3: Vous n'avez pas la permission d'Ã©criture sur ce ficher");
 		
 		FileWriter fwSortie = new FileWriter(fSortie);
 		
-		String html = mdToHTML(fEntree); // peut couper le programme (throw exception n°2)
+		String html = mdToHTML(fEntree); // peut couper le programme (throw exception nÂ°2)
 		
 		
 		fSortie.createNewFile(); 									// Creer un nouveau fichier au besoin
-		fwSortie.flush();											// Le nettoie avant écriture
+		fwSortie.flush();											// Le nettoie avant Ã©criture
 		fwSortie.write(html);
 		fwSortie.close();
 
 		String success =
 			"Votre fichier " + fEntree.getName() + "\n" +
-			"à été Parsé vers " + fSortie.getAbsolutePath() + "\n" +
+			"Ã  Ã©tÃ© ParsÃ© vers " + fSortie.getAbsolutePath() + "\n" +
 			"Avec Succes.";
 		
 		System.out.println(success);
