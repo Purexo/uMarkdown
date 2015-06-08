@@ -64,6 +64,13 @@ public class PnlMarkdown extends JPanel {
 
 	}
 
+	public void setFileIn(String file) {
+		strFileMd.setText(file);
+	}
+	public void setFileOut(String file) {
+		strFileHTML.setText(file);
+	}
+
 	/* --- ActionListener --- */
 	private ActionListener ALBtnMd = new ActionListener() { // bouton Markdown
 		public void actionPerformed(ActionEvent arg0) {

@@ -1,6 +1,7 @@
 package com.github.purexo.umarkdown.ihm.frame;
 
 import java.awt.BorderLayout;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -10,7 +11,8 @@ import com.github.purexo.umarkdown.ihm.panel.PnlMarkdown;
 public class FrmMarkdown extends JFrame {
 	private static final long serialVersionUID = 3558124465192390135L;
 	private JPanel contentPane;
-
+	private PnlMarkdown panel;
+	
 	/**
 	 * Create the frame.
 	 */
@@ -22,10 +24,17 @@ public class FrmMarkdown extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		
-		PnlMarkdown panel = new PnlMarkdown();
+		panel = new PnlMarkdown();
 		contentPane.add(panel, BorderLayout.CENTER);
 		
 		setVisible(true);
+	}
+
+	public void setFileIn(String file) {
+		panel.setFileIn(file);
+	}
+	public void setFileOut(String file) {
+		panel.setFileOut(file);
 	}
 
 }

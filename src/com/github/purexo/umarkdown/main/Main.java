@@ -22,30 +22,8 @@ public class Main {
 			"G:\\Travail\\Perso\\Java\\µmarkdown\\test\\test.md"
 			// ,"C:\\Users\\Théotime\\Desktop\\test.html"
 		};
-		File fEntree;
-		File fSortie;
-		try {
-			switch (args.length) {
-				case 0:
-					@SuppressWarnings("unused")
-					FrmMarkdown framePrg = new FrmMarkdown();
-					break;
-					// throw new Exception("1: nb de parametres insufisant (GUI non implanté)");
-				case 1:
-					fEntree = new File(args[0]);
-					fSortie = new File(MarkdownHTML.autoName(fEntree));
-					MarkdownHTML.fileToHTML(fEntree, fSortie);
-					break;
-				default:
-					fEntree = new File(args[0]);
-					fSortie = new File(args[1]);
-					MarkdownHTML.fileToHTML(fEntree, fSortie);
-					break;
-			}
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-		
+
+		new Process(args);
 	}
 
 }

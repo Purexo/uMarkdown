@@ -10,9 +10,9 @@ public class MarkdownHTML {
 	/**
 	 * @param fEntree : un fichier texte rédigé en Markdown
 	 * @return String : le texte au format HTML
-	 * @throws Exception : Signale que l'adresse est incorecte
+	 * @throws Exception : Signale que l'adresse est incorrecte
 	 */
-	public static String mdToHTML(File fEntree) throws Exception { // public pour etre appelable depuis l'interface graphique
+	public static String mdToHTML(File fEntree) throws Exception { // public pour être appelable depuis l'interface graphique
 		if (!fEntree.exists())
 			throw new Exception("2.0: Le fichier Mardown est inéxistant");
 		
@@ -26,20 +26,14 @@ public class MarkdownHTML {
 	}
 	
 	/**
-	 * Permet de transformer la chaine de caratère java.md en java.html
+	 * Permet de transformer la chaine de caractère java.md en java.html
 	 * @param f un Fichier
 	 * @return le nom du fichier - l'extension + ".html"
 	 */
 	public static String autoName(File f) { // public pour etre appelable depuis l'interface graphique
-		String[] split = f.getName().split(".");
-		String name = "";
-		
-		if (split.length > 1) {
-			for (int i = 0; i < split.length - 1; i++) {
-				if (i == 0) name += split[i];
-				else name += "." + split[i];
-			}
-		} else name = f.getName();
+		String name = f.getName ();
+		int i = name.lastIndexOf (".");
+		if ( i != -1 ) name = name.substring(0, i);
 		
 		return f.getParent() + "/" + name + ".html";
 	}
@@ -52,13 +46,12 @@ public class MarkdownHTML {
 		if (!fEntree.isFile())
 			throw new Exception("2.2: l'URI du document fourni n'est pas un fichier");
 
-		if (!fSortie.canWrite())
-			throw new Exception("3: Vous n'avez pas la permission d'écriture sur ce ficher");
-		
-		FileWriter fwSortie = new FileWriter(fSortie);
+		if (fSortie.exists() && !fSortie.canWrite())
+			throw new Exception("3: Vous n'avez pas la permission d'écriture sur ce ficher : " + fSortie.getName());
 		
 		String html = mdToHTML(fEntree); // peut couper le programme (throw exception n°2)
 		
+		FileWriter fwSortie = new FileWriter(fSortie);
 		
 		fSortie.createNewFile(); 									// Creer un nouveau fichier au besoin
 		fwSortie.flush();											// Le nettoie avant écriture
