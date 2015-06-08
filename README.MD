@@ -35,15 +35,15 @@ En gros vous pouvez utiliser mon code (ainsi que le binaire) librement
 
 # Pour la suite :
 ### V1 :
-1. [*] Un mode "automatique" seul le fichier markdown est a fournir, le fichier html seras généré dans le meme dossier que le fichier markdown avec le meme nom + ".html"</s> (done)
-2. [*] Une interface graphique (simple) une case pour le fichier markdown (pouvant ouvrir une fenetre de navigation pour choisir le fichier). Une deuxieme case pour choisir la destination. et un bouton valider
-3. [*] Faire un code un peu moins degeulasse (genre pas faire en sorte que le main() balance des exceptions ... xD)
+1. [x] Un mode "automatique" seul le fichier markdown est a fournir, le fichier html seras généré dans le meme dossier que le fichier markdown avec le meme nom + ".html"</s> (done)
+2. [x] Une interface graphique (simple) une case pour le fichier markdown (pouvant ouvrir une fenetre de navigation pour choisir le fichier). Une deuxieme case pour choisir la destination. et un bouton valider
+3. [x] Faire un code un peu moins degeulasse (genre pas faire en sorte que le main() balance des exceptions ... xD)
 
 ---------------------------------------------------------------------------
 ### V2
-4. Personnaliser le rendu en integrant du style css dans l'html via le code (genre un template façon [github, page static](https://pages.github.com/) généré par du markdown)
-5. Rendre le petit 4 moddable, genre un dossier Templates dans le .jar ou les gens pourraient rajouter leurs modeles de page static.
-6. faire un systeme de parametre avancé du genre :
+4. [ ] Personnaliser le rendu en integrant du style css dans l'html via le code (genre un template façon [github, page static](https://pages.github.com/) généré par du markdown)
+5. [ ] Rendre le petit 4 moddable, genre un dossier Templates dans le .jar ou les gens pourraient rajouter leurs modeles de page static.
+6. [ ] faire un systeme de parametre avancé du genre :
 
 ``` bash
 java -jar µMarkdown -nogui in="path/to/file.md" out="path/to/file.html" theme="Merlot"
@@ -51,7 +51,7 @@ java -jar µMarkdown -nogui in="path/to/file.md" out="path/to/file.html" theme="
 
 ---------------------------------------------------------------------------
 ### V3
-7. mode "site" : parcours un dossier recurssivement à la recherche des .md pour les convertir en html, tout en copiant collant les autres fichier
+7. [ ] mode "site" : parcours un dossier recurssivement à la recherche des .md pour les convertir en html, tout en copiant collant les autres fichier
 
 ``` bash
 java -jar µMarkdown -nogui in="path/to/mdFolder" out="path/to/htmlFolder" theme="Merlot"
