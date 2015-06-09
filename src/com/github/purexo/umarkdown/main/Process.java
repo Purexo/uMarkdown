@@ -33,17 +33,17 @@ public class Process {
 			
 			else if (param.startsWith("in="))	in  = param.replaceAll("in=|\"", "");
 			
-			else if (param.startsWith("out=")) 	out = param.replaceFirst("out=", "");
+			else if (param.startsWith("out=")) 	out = param.replaceAll("out=|\"", "");
 
-			else if (param.startsWith("tpl=")) 	tpl = param.replaceFirst("tpl=", "");
-			else if (param.startsWith("vct=")) 	vct = param.replaceFirst("vct=", "");
+			else if (param.startsWith("tpl=")) 	tpl = param.replaceAll("tpl=|\"", "");
+			else if (param.startsWith("vct=")) 	vct = param.replaceAll("vct=|\"", "");
 		}
 		
 		try {
 			if (gui) launchGUI();
 			else launchCMD();
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}
 	}
 	
@@ -59,7 +59,8 @@ public class Process {
 		
 		File fEntree;
 		File fSortie;
-		
+
+		//fEntree = new File("D:\\SavClé\\Travail\\Perso\\Java\\µmarkdown\\test.md");
 		fEntree = new File(in);
 		fSortie = (out == "") ? new File(MarkdownHTML.autoName(fEntree)) : new File(out);
 		

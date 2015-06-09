@@ -16,9 +16,9 @@ public class Main {
 	public static void main(String[] args) throws Exception {
 		@SuppressWarnings("unused")
 		String[] targs = {
-			"-nogui", "-page",
-			"in=\"D:\\SavClé\\Travail\\Perso\\Java\\µmarkdown\\test.md\""
-			// ,"C:\\Users\\Théotime\\Desktop\\test.html"
+			"-nogui", "-page"
+			,"in=\"D:\\SavClé\\Travail\\Perso\\Java\\µmarkdown\\test\\test.md\""
+			,"out=\"C:\\Users\\Théotime\\Desktop\\test.html\""
 		};
 
 		new Process(targs);

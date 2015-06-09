@@ -97,6 +97,6 @@ Au choix vous pouvez utiliser l'interface web ```http://votre.domaine:9091/```, 
 Voila, maintenant vous pourrez télécharger vos isos de distribution linux préférés ;-)
 
 ## Mes Sources / Librement inspiré de
-- <https://www.guillaume-leduc.fr/la-seedbox-facile-sous-debian-avec-transmission.html> (quelques petits rappel)
-- <http://www.system-linux.eu/index.php?post/2009/04/23/Mettre-en-place-un-htaccess-avec-htpasswd> (pour le htpasswd, je le savais mais ma mémoire est courte xD)
+- https://www.guillaume-leduc.fr/la-seedbox-facile-sous-debian-avec-transmission.html (quelques petits rappel)
+- http://www.system-linux.eu/index.php?post/2009/04/23/Mettre-en-place-un-htaccess-avec-htpasswd (pour le htpasswd, je le savais mais ma mémoire est courte xD)
 - mes connaissances/expériences personnelles
