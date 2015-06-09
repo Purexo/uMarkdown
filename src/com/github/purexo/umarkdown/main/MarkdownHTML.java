@@ -74,12 +74,12 @@ public class MarkdownHTML {
 	}
 	
 	public static void fileToHTML(File fEntree, File fSortie, String pathtpl, String pathvct) throws Exception { // public pour etre appelable depuis l'interface graphique
-		if (!fEntree.exists())
-			throw new Exception("2.0: Le fichier Mardown est inéxistant");
-		if (!fEntree.canRead())
-			throw new Exception("2.1: Vous n'avez pas les permissions pour lire le fichier");
-		if (!fEntree.isFile())
-			throw new Exception("2.2: l'URI du document fourni n'est pas un fichier");
+		//if (!fEntree.exists())
+			//throw new Exception("2.0: Le fichier Mardown est inéxistant");
+		//if (!fEntree.canRead())
+			//throw new Exception("2.1: Vous n'avez pas les permissions pour lire le fichier");
+		//if (!fEntree.isFile())
+			//throw new Exception("2.2: l'URI du document fourni n'est pas un fichier");
 
 		if (fSortie.exists() && !fSortie.canWrite())
 			throw new Exception("3: Vous n'avez pas la permission d'écriture sur ce ficher : " + fSortie.getName());

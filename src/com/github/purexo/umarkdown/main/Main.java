@@ -16,11 +16,12 @@ public class Main {
 	public static void main(String[] args) throws Exception {
 		@SuppressWarnings("unused")
 		String[] targs = {
-			"G:\\Travail\\Perso\\Java\\µmarkdown\\test\\test.md"
+			"-nogui", "-page",
+			"in=\"D:\\SavClé\\Travail\\Perso\\Java\\µmarkdown\\test.md\""
 			// ,"C:\\Users\\Théotime\\Desktop\\test.html"
 		};
 
-		new Process(args);
+		new Process(targs);
 	}
 
 }

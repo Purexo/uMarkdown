@@ -14,8 +14,8 @@ public class Process {
 	
 	private String tpl = "Ressources/tpl/default/tpl.html";	// chemin du fichier de template
 	private String vct = "Ressources/tpl/default/vct.html";	// chemin du fichier var container ("à sérialiser")
-	private boolean usertpl = false;	// template fournis par l'user ?
-	private boolean uservct = false;	// var container fournis par l'user ?
+	//private boolean usertpl = false;	// template fournis par l'user ?
+	//private boolean uservct = false;	// var container fournis par l'user ?
 	
 	public Process(String[] params) {
 		for (int i = 0; i < params.length; i++) {
@@ -28,10 +28,11 @@ public class Process {
 			else if (param == "-nosite") 	site = false;
 			else if (param == "-page") 		page = true;
 			
-			else if (param == "-usertpl") 	usertpl = true;
-			else if (param == "-uservct") 	uservct = true;
+			//else if (param == "-usertpl") 	usertpl = true;
+			//else if (param == "-uservct") 	uservct = true;
 			
-			else if (param.startsWith("in="))	in  = param.replaceFirst("in=", "");
+			else if (param.startsWith("in="))	in  = param.replaceAll("in=|\"", "");
+			
 			else if (param.startsWith("out=")) 	out = param.replaceFirst("out=", "");
 
 			else if (param.startsWith("tpl=")) 	tpl = param.replaceFirst("tpl=", "");
@@ -54,6 +55,7 @@ public class Process {
 	
 	private void launchCMD() throws Exception {
 		if (in == "") throw new Exception("2. : Le fichier markdown n'a pas été précisé");
+		System.out.println(in);
 		
 		File fEntree;
 		File fSortie;
