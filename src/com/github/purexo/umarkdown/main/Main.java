@@ -1,7 +1,4 @@
 package com.github.purexo.umarkdown.main;
-import java.io.File;
-
-import com.github.purexo.umarkdown.ihm.frame.FrmMarkdown;
 
 public class Main {
 	/**

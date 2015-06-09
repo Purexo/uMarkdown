@@ -1,9 +1,16 @@
 package com.github.purexo.umarkdown.main;
 
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
+import java.util.Scanner;
+
+import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.markdown4j.Markdown4jProcessor;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 public class MarkdownHTML {
 
@@ -37,7 +44,7 @@ public class MarkdownHTML {
 		
 		return f.getParent() + "/" + name + ".html";
 	}
-	
+
 	public static void fileToHTML(File fEntree, File fSortie) throws Exception { // public pour etre appelable depuis l'interface graphique
 		if (!fEntree.exists())
 			throw new Exception("2.0: Le fichier Mardown est inéxistant");
@@ -64,5 +71,54 @@ public class MarkdownHTML {
 			"Avec Succes.";
 		
 		System.out.println(success);
+	}
+	
+	public static void fileToHTML(File fEntree, File fSortie, String pathtpl, String pathvct) throws Exception { // public pour etre appelable depuis l'interface graphique
+		if (!fEntree.exists())
+			throw new Exception("2.0: Le fichier Mardown est inéxistant");
+		if (!fEntree.canRead())
+			throw new Exception("2.1: Vous n'avez pas les permissions pour lire le fichier");
+		if (!fEntree.isFile())
+			throw new Exception("2.2: l'URI du document fourni n'est pas un fichier");
+
+		if (fSortie.exists() && !fSortie.canWrite())
+			throw new Exception("3: Vous n'avez pas la permission d'écriture sur ce ficher : " + fSortie.getName());
+		
+		String html = mdToHTML(fEntree); // peut couper le programme (throw exception n°2)
+		html = templating(pathtpl, pathvct, html);
+		
+		FileWriter fwSortie = new FileWriter(fSortie);
+		
+		fSortie.createNewFile(); 									// Creer un nouveau fichier au besoin
+		fwSortie.flush();											// Le nettoie avant écriture
+		fwSortie.write(html);
+		fwSortie.close();
+
+		String success =
+			"Votre fichier " + fEntree.getName() + "\n" +
+			"à été Parsé vers " + fSortie.getAbsolutePath() + "\n" +
+			"Avec Succes.";
+		
+		System.out.println(success);
+	}
+	
+	private static String templating(String pathtpl, String pathvct, String html) throws Exception {
+		Scanner scanner = new Scanner( new File(pathtpl) );
+		String tpl = scanner.useDelimiter("\\A").next();
+		scanner.close();
+		
+		Document vct = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(pathvct);
+		
+		NodeList items =  vct.getChildNodes();
+		for (int i = 0; i < items.getLength(); i++) {
+			Node item = items.item(i);
+			String name = item.getNodeName();
+			
+			tpl = tpl.replace("{{" + name + "}}", item.getNodeValue());
+		}
+		
+		html = tpl.replace("{{Markdown}}", html);
+		
+		return html;
 	}
 }
