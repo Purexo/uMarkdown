@@ -1,13 +1,21 @@
-<!DOCTYPE HTML>
+<!doctype html>
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
-	<title> {{title}} </title>
-	{{includehead}}
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<Title>Mon Superbe Fichier</Title>
+	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/default.min.css" />
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
 </head>
 <body>
-	{{includeheader}}
-	{{MARKDOWN}}
-	{{includefooter}}
+	<header>
+	</header>
+	
+	<section class="markdown">
+		{{MARKDOWN}}
+	</section>
+	
+	<footer>
+	</footer>
 </body>
 </html>

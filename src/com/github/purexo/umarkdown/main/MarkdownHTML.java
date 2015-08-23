@@ -4,10 +4,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.util.Scanner;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 import org.markdown4j.Markdown4jProcessor;
 
 public class MarkdownHTML {
@@ -66,13 +62,13 @@ public class MarkdownHTML {
 		System.out.println(success);
 	}
 	
-	public static void fileToHTML(File fEntree, File fSortie, String pathtpl, String pathvct) throws Exception { // public pour etre appelable depuis l'interface graphique
+	public static void fileToHTML(File fEntree, File fSortie, String pathtpl) throws Exception { // public pour etre appelable depuis l'interface graphique
 
 		if (fSortie.exists() && !fSortie.canWrite())
 			throw new Exception("3: Vous n'avez pas la permission d'écriture sur ce ficher : " + fSortie.getName());
 		
 		String html = mdToHTML(fEntree); // peut couper le programme (throw exception n°2)
-		html = templating(pathtpl, pathvct, html);
+		html = templating(pathtpl, html);
 		
 		FileWriter fwSortie = new FileWriter(fSortie);
 		
@@ -89,20 +85,10 @@ public class MarkdownHTML {
 		System.out.println(success);
 	}
 	
-	private static String templating(String pathtpl, String pathvct, String html) throws Exception {
+	private static String templating(String pathtpl, String html) throws Exception {
 		Scanner scanner = new Scanner( new File(pathtpl) );
 		String tpl = scanner.useDelimiter("\\A").next();
 		scanner.close();
-
-		Document document = Jsoup.parse(new File(pathvct), "UTF-8");
-		Element body = document.body();
-		Elements items = body.getAllElements();
-		
-		for (Element item : items) {
-			String name = item.tagName();
-			
-			tpl = tpl.replace("{{" + name + "}}", item.html());
-		}
 
 		html = tpl.replace("{{MARKDOWN}}", html);
 		return html;

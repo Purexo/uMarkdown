@@ -34,6 +34,8 @@ public class PnlMarkdown extends JPanel {
 		strFileMd.setColumns(10);
 		strFileHTML = new JTextField();
 		strFileHTML.setColumns(10);
+		strFileTPL = new JTextField();
+		strFileTPL.setColumns(10);
 		
 		/*
 		 * Bouton pour selectionner le fichier d'entree
@@ -46,6 +48,12 @@ public class PnlMarkdown extends JPanel {
 		 */
 		JButton btnFileHTML = new JButton("Browse HTML File");
 		btnFileHTML.addActionListener(ALBtnHTML);
+		
+		/*
+		 * Bouton pour sélectionner le fichier de template
+		 */
+		JButton btnFileTPL = new JButton("Browse Template File");
+		btnFileTPL.addActionListener(ALBtnTPL);
 
 		/*
 		 * Bouton lancer la procedure
@@ -59,6 +67,9 @@ public class PnlMarkdown extends JPanel {
 		add(btnFileMd);
 		add(strFileHTML);
 		add(btnFileHTML);
+		add(strFileTPL);
+		add(btnFileTPL);
+		
 		add(horizontalBox);
 		add(btnValidate);
 
@@ -72,7 +83,7 @@ public class PnlMarkdown extends JPanel {
 	}
 
 	/* --- ActionListener --- */
-	private ActionListener ALBtnMd = new ActionListener() { // bouton Markdown
+	private ActionListener ALBtnMd = new ActionListener() { // button  Markdown
 		public void actionPerformed(ActionEvent arg0) {
 			JFileChooser chooser = new JFileChooser();
 			FileNameExtensionFilter filter = new FileNameExtensionFilter(
@@ -86,7 +97,7 @@ public class PnlMarkdown extends JPanel {
 	        }
 		}
 	};
-	private ActionListener ALBtnHTML = new ActionListener() { // bouton HTML
+	private ActionListener ALBtnHTML = new ActionListener() { // button HTML
 		public void actionPerformed(ActionEvent arg0) {
 			JFileChooser chooser = new JFileChooser();
 			FileNameExtensionFilter filter = new FileNameExtensionFilter(
@@ -100,6 +111,20 @@ public class PnlMarkdown extends JPanel {
 	        }
 		}
 	};
+	private ActionListener ALBtnTPL = new ActionListener() { // button TPL
+		public void actionPerformed(ActionEvent arg0) {
+			JFileChooser chooser = new JFileChooser();
+			FileNameExtensionFilter filter = new FileNameExtensionFilter(
+			        "HTML files", "html", "htm", "xhtml", "tpl");
+		    chooser.setFileFilter(filter);
+		    
+	        int returnVal = chooser.showOpenDialog(chooser.getParent());
+	        if(returnVal == JFileChooser.APPROVE_OPTION) {
+	        	fSortie = chooser.getSelectedFile();
+	        	strFileTPL.setText(chooser.getSelectedFile().getAbsolutePath());
+	        }
+		}
+	};
 	private ActionListener ALBtnOK = new ActionListener() { // bouton de validation
 		public void actionPerformed(ActionEvent event) {
 			fEntree = new File(strFileMd.getText());
@@ -109,9 +134,15 @@ public class PnlMarkdown extends JPanel {
 			else
 				fSortie = new File(strFileHTML.getText());
 			
-			try { MarkdownHTML.fileToHTML(fEntree, fSortie); }
+			try {
+				if (strFileTPL.getText().length() == 0)
+					MarkdownHTML.fileToHTML(fEntree, fSortie);
+				else
+					MarkdownHTML.fileToHTML(fEntree, fSortie, strFileTPL.getText());
+			}
 			catch (Exception e) { e.printStackTrace(); }
 		}
 	};
+	private JTextField strFileTPL;
 	
 }
