@@ -11,7 +11,11 @@ import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.io.File;
+import java.io.UnsupportedEncodingException;
+import java.net.URISyntaxException;
+import java.net.URLDecoder;
 
+import com.github.purexo.umarkdown.main.Main;
 import com.github.purexo.umarkdown.main.MarkdownHTML;
 
 
@@ -81,6 +85,9 @@ public class PnlMarkdown extends JPanel {
 	public void setFileOut(String file) {
 		strFileHTML.setText(file);
 	}
+	public void setFileTPL(String file) {
+		strFileTPL.setText(file);
+	}
 
 	/* --- ActionListener --- */
 	private ActionListener ALBtnMd = new ActionListener() { // button  Markdown
@@ -89,6 +96,14 @@ public class PnlMarkdown extends JPanel {
 			FileNameExtensionFilter filter = new FileNameExtensionFilter(
 			        "Markdown files", "md", "markdown");
 		    chooser.setFileFilter(filter);
+		    // Définir l'emplacement par défaut du chooser au dossier parent du binaire
+		    File jarFile;
+			try {
+				jarFile = new File(URLDecoder.decode(Main.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath(), "UTF-8"));
+			    chooser.setCurrentDirectory(jarFile.getParentFile());
+			} catch (UnsupportedEncodingException | URISyntaxException e) {
+				e.printStackTrace();
+			}
 
 	        int returnVal = chooser.showOpenDialog(chooser.getParent());
 	        if(returnVal == JFileChooser.APPROVE_OPTION) {
@@ -103,6 +118,14 @@ public class PnlMarkdown extends JPanel {
 			FileNameExtensionFilter filter = new FileNameExtensionFilter(
 			        "HTML files", "html", "htm", "xhtml");
 		    chooser.setFileFilter(filter);
+		 // Définir l'emplacement par défaut du chooser au dossier parent du binaire
+		    File jarFile;
+			try {
+				jarFile = new File(URLDecoder.decode(Main.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath(), "UTF-8"));
+			    chooser.setCurrentDirectory(jarFile.getParentFile());
+			} catch (UnsupportedEncodingException | URISyntaxException e) {
+				e.printStackTrace();
+			}
 		    
 	        int returnVal = chooser.showOpenDialog(chooser.getParent());
 	        if(returnVal == JFileChooser.APPROVE_OPTION) {
@@ -117,6 +140,14 @@ public class PnlMarkdown extends JPanel {
 			FileNameExtensionFilter filter = new FileNameExtensionFilter(
 			        "HTML files", "html", "htm", "xhtml", "tpl");
 		    chooser.setFileFilter(filter);
+		    // Définir l'emplacement par défaut du chooser au dossier parent du binaire
+		    File jarFile;
+			try {
+				jarFile = new File(URLDecoder.decode(Main.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath(), "UTF-8"));
+			    chooser.setCurrentDirectory(jarFile.getParentFile());
+			} catch (UnsupportedEncodingException | URISyntaxException e) {
+				e.printStackTrace();
+			}
 		    
 	        int returnVal = chooser.showOpenDialog(chooser.getParent());
 	        if(returnVal == JFileChooser.APPROVE_OPTION) {

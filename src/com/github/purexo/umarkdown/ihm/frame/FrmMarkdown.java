@@ -36,5 +36,8 @@ public class FrmMarkdown extends JFrame {
 	public void setFileOut(String file) {
 		panel.setFileOut(file);
 	}
+	public void setFileTPL(String file) {
+		panel.setFileTPL(file);
+	}
 
 }

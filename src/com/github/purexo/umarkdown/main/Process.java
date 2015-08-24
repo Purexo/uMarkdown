@@ -6,13 +6,14 @@ import com.github.purexo.umarkdown.ihm.frame.FrmMarkdown;
 
 public class Process {
 	private boolean gui = true;			// utilise t'on la GUI ?
+	@SuppressWarnings("unused")
 	private boolean site = false;		// utilise t'on le mode "Site Static" ? (non implanté)
 	private boolean page = true;		// utilise t'on le mode "page" ?
 	
 	private String in = "";				// chemin du fichier d'entré (Markdown)
 	private String out = "";			// chemin du fichier de sortie (HTML)
 	
-	private String tpl = "Ressources/tpl/default/tpl.html";	// chemin du fichier de template
+	private String tpl = "/tpl/default.html";	// chemin du fichier de template
 	
 	public Process(String[] params) {
 		for (String param : params) {
@@ -42,6 +43,7 @@ public class Process {
 		FrmMarkdown framePrg = new FrmMarkdown();
 		framePrg.setFileIn(in);
 		framePrg.setFileOut(out);
+		framePrg.setFileTPL(tpl);
 	}
 	
 	private void launchCMD() throws Exception {

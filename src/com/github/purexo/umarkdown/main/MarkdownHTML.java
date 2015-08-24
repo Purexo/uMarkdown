@@ -86,7 +86,16 @@ public class MarkdownHTML {
 	}
 	
 	private static String templating(String pathtpl, String html) throws Exception {
-		Scanner scanner = new Scanner( new File(pathtpl) );
+		Scanner scanner;
+		File tplfile = new File(pathtpl);
+		
+		if (tplfile.exists()) {
+			scanner = new Scanner( tplfile );
+		}
+		else {
+			scanner = new Scanner(new File(MarkdownHTML.class.getResource(pathtpl).toURI()));
+		}
+
 		String tpl = scanner.useDelimiter("\\A").next();
 		scanner.close();
 
