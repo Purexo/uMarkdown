@@ -62,7 +62,7 @@ En gros vous pouvez utiliser mon code (ainsi que le binaire) librement
 
 # Pour la suite :
 ### V1 :
-1. [x] Un mode "automatique" seul le fichier markdown est a fournir, le fichier html seras généré dans le meme dossier que le fichier markdown avec le meme nom + ".html"</s> (done)
+1. [x] Un mode "automatique" seul le fichier markdown est a fournir, le fichier html seras généré dans le meme dossier que le fichier markdown avec le meme nom + ".html" (done)
 2. [x] Une interface graphique (simple) une case pour le fichier markdown (pouvant ouvrir une fenetre de navigation pour choisir le fichier). Une deuxieme case pour choisir la destination. et un bouton valider
 3. [x] Faire un code un peu moins degeulasse (genre pas faire en sorte que le main() balance des exceptions ... xD)
 4. [x] faire un systeme de parametre avancé du genre :
@@ -76,7 +76,7 @@ java -jar µMarkdown -nogui in="path/to/file.md" out="path/to/file.html" -page t
 1. [X] Personnaliser le rendu en integrant du style css dans l'html via le code (genre un template façon [github, page static](https://pages.github.com/) généré par du markdown)
 	* Un fichier de template est fourni. Ressources/tpl/default/tpl.html
 	* ça ne change pas le comportement du parser
-	* en mettant la "balise" {{MARKDOWN}} dans votre fichier de template, celle-ci sera remplacé par votre markdown parsé.
+	* en mettant la "balise" ```{{MARKDOWN}}``` dans votre fichier de template, celle-ci sera remplacé par votre markdown parsé.
 2. [X] Rendre le petit 4 moddable, genre un dossier Templates dans le .jar ou les gens pourraient rajouter leurs modeles de page static.
 3. [X] Interface graphique supportant le mode page/template intégré.
 
@@ -85,5 +85,5 @@ java -jar µMarkdown -nogui in="path/to/file.md" out="path/to/file.html" -page t
 7. [ ] mode "site" : parcours un dossier recurssivement à la recherche des .md pour les convertir en html, tout en copiant collant les autres fichier
 
 ``` bash
-java -jar µMarkdown -nogui in="path/to/mdFolder" out="path/to/htmlFolder" theme="Merlot"
+java -jar µMarkdown -nogui -site in="path/to/mdFolder" out="path/to/htmlFolder" -page tpl="/tpl/default.html"
 ```
